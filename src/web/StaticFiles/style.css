@@ -1,0 +1,245 @@
+p {
+    font-family: 'Cute Font';
+    font-size: 75px;
+    margin: 0;
+    height: 70px;
+}
+h1 {
+    font-family: 'Baloo Chettan';
+    font-size: 55px;
+    margin: 0;
+    height: 70px;
+    position: absolute;
+    top: 6px;
+    left: 425px;
+}
+h2 {
+    color: orange;
+    font-family: 'Baloo Chettan';
+    font-size: 60px;
+    margin: 0;
+    height: 70px;
+    position: absolute;
+    top: 0;
+    left: 725px;
+}
+h3 {
+     color: #a8b7e8;
+     font-family: 'Baloo Chettan';
+     font-size: 20px;
+     margin: 0;
+     height: 70px;
+     position: absolute;
+     top: 800px;
+     left: 12px;
+ }
+h4 {
+    color: #a8b7e8;
+    font-family: 'Baloo Chettan';
+    font-size: 20px;
+    margin: 0;
+    height: 70px;
+    position: absolute;
+    top: 800px;
+    left: 150px;
+}
+h5 {
+    color: black;
+    font-family: 'Baloo Chettan';
+    font-size: 40px;
+    margin: 0;
+    height: 70px;
+    position: absolute;
+    top: 10px;
+    left: 1600px;
+}
+h6 {
+    color: black;
+    font-family: 'Baloo Chettan';
+    font-size: 40px;
+    margin: 0;
+    height: 70px;
+    position: absolute;
+    top: 10px;
+    left: 1750px;
+}
+input {
+    position: absolute;
+    top: 761px;
+    left: 1414px;
+    width: 275px;
+    height: 62px;
+    font-family: 'Cute Font';
+    font-size:50px;
+    background: rgba(255,255,255,0.1);
+    border: none;
+    outline: none;
+    color: #333;
+    -webkit-box-shadow: 0 2px 10px 1px rgba(0,0,0,0.5);
+    box-shadow: 0 2px 10px 1px rgba(0,0,0,0.5);
+}
+::-webkit-input-placeholder { color: #666;}
+:-moz-placeholder { color: #666; }
+::-moz-placeholder { color: #666; }
+:-ms-input-placeholder { color: #666; }
+#guessButton {
+    position: absolute;
+    top: 761px;
+    left: 1695px;
+    width: 175px;
+    height: 65px;
+    font-size:24px;
+    font-family: 'Baloo Chettan';
+}
+#clearButton {
+    position: absolute;
+    top: 13px;
+    left: 1308px;
+    width: 100px;
+    height: 60px;
+    font-size:25px;
+    font-family: 'Baloo Chettan';
+}
+#blackButton {
+    position: absolute;
+    top: 840px;
+    left: 8px;
+    width: 80px;
+    height: 40px;
+    font-size:20px;
+    font-family: 'Baloo Chettan';
+}
+#redButton {
+    position: absolute;
+    top: 840px;
+    left: 98px;
+    width: 80px;
+    height: 40px;
+    font-size:20px;
+    font-family: 'Baloo Chettan';
+    color: red;
+}
+#orangeButton {
+    position: absolute;
+    top: 840px;
+    left: 188px;
+    width: 80px;
+    height: 40px;
+    font-size:20px;
+    font-family: 'Baloo Chettan';
+    color: orange;
+}
+#yellowButton {
+    position: absolute;
+    top: 840px;
+    left: 278px;
+    width: 80px;
+    height: 40px;
+    font-size:20px;
+    font-family: 'Baloo Chettan';
+    color: yellow;
+}
+#greenButton {
+    position: absolute;
+    top: 840px;
+    left: 368px;
+    width: 80px;
+    height: 40px;
+    font-size:20px;
+    font-family: 'Baloo Chettan';
+    color: green;
+}
+#blueButton {
+    position: absolute;
+    top: 840px;
+    left: 458px;
+    width: 80px;
+    height: 40px;
+    font-size:20px;
+    font-family: 'Baloo Chettan';
+    color: blue;
+}
+#purpleButton {
+    position: absolute;
+    top: 840px;
+    left: 548px;
+    width: 80px;
+    height: 40px;
+    font-size:20px;
+    font-family: 'Baloo Chettan';
+    color: purple;
+}
+#brownButton {
+    position: absolute;
+    top: 840px;
+    left: 638px;
+    width: 80px;
+    height: 40px;
+    font-size:20px;
+    font-family: 'Baloo Chettan';
+    color: brown;
+}
+#eraseButton {
+     position: absolute;
+     top: 834px;
+     left: 1308px;
+     width: 100px;
+     height: 60px;
+     font-size:25px;
+     font-family: 'Baloo Chettan';
+ }
+#resetButton {
+    position: absolute;
+    top: 400px;
+    left: 1508px;
+    width: 100px;
+    height: 60px;
+    font-size:25px;
+    font-family: 'Baloo Chettan';
+}
+body {
+    width: 100vw;
+    height: 90vh;
+    color: #fff;
+    background: linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);
+    background-size: 400% 400%;
+    -webkit-animation: Gradient 45s ease infinite;
+    -moz-animation: Gradient 45s ease infinite;
+    animation: Gradient 45s ease infinite;
+}
+
+@-webkit-keyframes Gradient {
+    0% {
+        background-position: 0 50%
+    }
+    50% {
+        background-position: 100% 50%
+    }
+    100% {
+        background-position: 0 50%
+    }
+}
+
+@-moz-keyframes Gradient {
+    0% {
+        background-position: 0 50%
+    }
+    50% {
+        background-position: 100% 50%
+    }
+    100% {
+        background-position: 0 50%
+    }
+}
+
+@keyframes Gradient {
+    0% {
+        background-position: 0 50%
+    }
+    50% {
+        background-position: 100% 50%
+    }
+    100% {
+        background-position: 0 50%
+    }
+}

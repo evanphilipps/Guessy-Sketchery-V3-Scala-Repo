@@ -1,0 +1,50 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Guessy Sketchery</title>
+    <script language="javascript" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/p5.min.js"></script>
+    <script language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/addons/p5.dom.min.js"></script>
+    <script language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/addons/p5.sound.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Black Ops One' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Cute Font' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Baloo Chettan' rel='stylesheet'>
+    <link href='style.css' rel='stylesheet' type="text/css">
+    <link rel="shortcut icon" type="image/png" href="https://i.imgur.com/WaMmeF0.png"/>
+
+</head>
+<body>
+<p id="timer" style="-moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;" unselectable="on" onselectstart="return false;" onmousedown="return false;"></p>
+<h1 style="-moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;" unselectable="on" onselectstart="return false;" onmousedown="return false;">Your word: </h1>
+<h2 id="randomWord" style="-moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;" unselectable="on" onselectstart="return false;" onmousedown="return false;"></h2>
+<h3 style="-moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;" unselectable="on" onselectstart="return false;" onmousedown="return false;">Current Color:</h3>
+<h4 id='colorSelected' style="-moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;" unselectable="on" onselectstart="return false;" onmousedown="return false;">black</h4>
+<input id="guess" type="text">
+<button id="guessButton" style="-moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;" unselectable="on" onselectstart="return false;" onmousedown="return false;" onClick="if(guessedCorrect === false){takeGuess();isPressed();}">Make Guess!</button>
+<button id="clearButton" style="-moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;" unselectable="on" onselectstart="return false;" onmousedown="return false;" onClick="clearBoard();strokeWeight(5)">CLEAR</button>
+<button id="blackButton" style="-moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;" unselectable="on" onselectstart="return false;" onmousedown="return false;" onClick="changeColor('black', 5);">Black</button>
+<button id="redButton" style="-moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;" unselectable="on" onselectstart="return false;" onmousedown="return false;" onClick="changeColor('red', 5);">Red</button>
+<button id="orangeButton" style="-moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;" unselectable="on" onselectstart="return false;" onmousedown="return false;" onClick="changeColor('orange', 5);">Orange</button>
+<button id="yellowButton" style="-moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;" unselectable="on" onselectstart="return false;" onmousedown="return false;" onClick="changeColor('yellow', 5);">Yellow</button>
+<button id="greenButton" style="-moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;" unselectable="on" onselectstart="return false;" onmousedown="return false;" onClick="changeColor('green', 5);">Green</button>
+<button id="blueButton" style="-moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;" unselectable="on" onselectstart="return false;" onmousedown="return false;" onClick="changeColor('blue', 5);">Blue</button>
+<button id="purpleButton" style="-moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;" unselectable="on" onselectstart="return false;" onmousedown="return false;" onClick="changeColor('purple', 5);">Purple</button>
+<button id="brownButton" style="-moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;" unselectable="on" onselectstart="return false;" onmousedown="return false;" onClick="changeColor('brown', 5);">Brown</button>
+<button id="eraseButton" style="-moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;" unselectable="on" onselectstart="return false;" onmousedown="return false;" onClick="changeColor('white', 30);colorNow.html('eraser');">ERASER</button>
+<h5 style="-moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;" unselectable="on" onselectstart="return false;" onmousedown="return false;">Points: </h5>
+<h6 id='score' style="-moz-user-select: none; -webkit-user-select: none; -ms-user-select:none; user-select:none;-o-user-select:none;" unselectable="on" onselectstart="return false;" onmousedown="return false;">0</h6>
+<script language="javascript" type="text/javascript" src="game.js"></script>
+
+<script>
+    var input = document.getElementById("guess");
+    input.addEventListener("keyup", function(event) {
+        if (event.keyCode === 13) {
+            event.preventDefault();
+            document.getElementById("guessButton").click();
+        }
+    });
+</script>
+</body>
+</html>
