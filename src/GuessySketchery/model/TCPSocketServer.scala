@@ -3,6 +3,7 @@ import java.net.InetSocketAddress
 
 import akka.actor.{Actor, ActorRef, ActorSystem, Props}
 import akka.io.{IO, Tcp}
+import akka.util.ByteString
 import play.api.libs.json.{JsValue, Json}
 
 
@@ -13,8 +14,7 @@ class TCPSocketServer(gameActor: ActorRef) extends Actor {
   import context.system
 
   IO(Tcp) ! Bind(self, new InetSocketAddress("localhost", 8000))
-
-  var webServers: Set[ActorRef] = Set()
+  var clients: Set[ActorRef] = Set()
   var buffer: String = ""
   val delimiter: String = "~"
 
@@ -22,13 +22,20 @@ class TCPSocketServer(gameActor: ActorRef) extends Actor {
     case b: Bound => println("Listening on port: " + b.localAddress.getPort)
     case c: Connected =>
       println("Client Connected: " + c.remoteAddress)
-      this.webServers = this.webServers + sender()
+      this.clients = this.clients + sender()
       sender() ! Register(self)
-      println()
-
+      println("connected " + clients)
+    case r: Received =>
+      buffer += r.data.utf8String
+      while (buffer.contains(delimiter)) {
+        val curr = buffer.substring(0, buffer.indexOf(delimiter))
+        buffer = buffer.substring(buffer.indexOf(delimiter) + 1)
+        handleMessageFromWebServer(curr)
+      }
+    case SendGameState =>
+      gameActor ! SendGameState
   }
-
-  def handleMessageFromWebServer(messageString: String): Unit = {
+  def handleMessageFromWebServer(messageString:String):Unit = {
     val message: JsValue = Json.parse(messageString)
     val username = (message \ "username").as[String]
     val messageType = (message \ "action").as[String]
@@ -36,10 +43,10 @@ class TCPSocketServer(gameActor: ActorRef) extends Actor {
     messageType match {
       case "connected" => gameActor ! AddPlayer(username)
       case "disconnected" => gameActor ! RemovePlayer(username)
+      case "mouse" => gameActor ! gameState
     }
   }
 }
-
   object TCPSocketServer {
 
     def main(args: Array[String]): Unit = {
@@ -48,8 +55,8 @@ class TCPSocketServer(gameActor: ActorRef) extends Actor {
       val gameActor = actorSystem.actorOf(Props(classOf[GameActor]))
       val server = actorSystem.actorOf(Props(classOf[TCPSocketServer], gameActor))
 
-      //actorSystem.scheduler.schedule(16.milliseconds, 32.milliseconds, gameActor, UpdateGame)
-      // actorSystem.scheduler.schedule(32.milliseconds, 32.milliseconds, server, SendGameState)
+      actorSystem.scheduler.schedule(16.milliseconds, 32.milliseconds, gameActor, UpdateGame)
+      actorSystem.scheduler.schedule(32.milliseconds, 32.milliseconds, server, SendGameState)
     }
 
   }

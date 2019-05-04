@@ -23,10 +23,19 @@ var player;
 var username = "";
 var score = 0;
 var type = "guesser";
+var socket = io.connect({transports: ['websocket']});
+socket.on('connect', function (event) {
+    print("CONNECTED"+socket)
+});
+/*socket.on('gameState', parseGameState);
+
+function parseGameState(event) {
+    const gameState = JSON.parse(event)
 
 
 
-
+}
+*/
 
 
 function preload() {
@@ -37,8 +46,8 @@ function preload() {
     masterVolume(.5);
 }
 function setup() {
-    var socket = io.connect({transports: ['websocket']});
-    //socket.on('mouse', newDrawing);
+
+
     w = 1400;
     h = 750;
     counter = 0;
@@ -53,7 +62,7 @@ function setup() {
     startTimer();
     colorNow = select("#colorSelected");
 }
-/*
+
 function newDrawing(data){
     colorNow.html(data.color );
     stroke(data.color);
@@ -75,7 +84,7 @@ function mouseDragged(){
     if (mouseIsPressed && counter !== timeleft) {
         line(mouseX, mouseY, pmouseX, pmouseY);
     }
-}*/
+}
 function draw() {
     if (mouseIsPressed && counter !== timeleft) {
         line(mouseX, mouseY, pmouseX, pmouseY);
