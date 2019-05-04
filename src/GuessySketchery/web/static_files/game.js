@@ -1,4 +1,3 @@
-var storage = require("./playerStorage");
 var counter;
 var timeleft = 15;
 var currentArtistColor = "black";
@@ -24,6 +23,12 @@ var player;
 var username = "";
 var score = 0;
 var type = "guesser";
+
+
+
+
+
+
 function preload() {
     tenSecondsLeft = loadSound("sounds/countdownSound.mp3");
     timesup = loadSound("sounds/airhorn.mp3");
@@ -32,22 +37,12 @@ function preload() {
     masterVolume(.5);
 }
 function setup() {
+    var socket = io.connect({transports: ['websocket']});
+    //socket.on('mouse', newDrawing);
     w = 1400;
     h = 750;
     counter = 0;
     createCanvas(w, h);
-    socket = io.connect('http://localhost:8080');
-    username = "user" + randInt(0, 100000).toString();
-    print(username);
-    if(!artistAssigned()){
-        type = "artist"
-    }
-    var player = new Player(username, score, type);
-    storage.players
-    print(player.username);
-    print(player.score);
-    print(player.type);
-    socket.on('mouse', newDrawing);
     noStroke();
     rect(0, 0, w, h);
     stroke(0);
@@ -58,6 +53,7 @@ function setup() {
     startTimer();
     colorNow = select("#colorSelected");
 }
+/*
 function newDrawing(data){
     colorNow.html(data.color );
     stroke(data.color);
@@ -65,7 +61,6 @@ function newDrawing(data){
 }
 
 function mouseDragged(){
-    console.log("Sending: "+mouseX+","+mouseY+"    P's: "+pmouseX+","+pmouseY);
 
     var data = {
         username: "",
@@ -80,9 +75,11 @@ function mouseDragged(){
     if (mouseIsPressed && counter !== timeleft) {
         line(mouseX, mouseY, pmouseX, pmouseY);
     }
-}
+}*/
 function draw() {
-
+    if (mouseIsPressed && counter !== timeleft) {
+        line(mouseX, mouseY, pmouseX, pmouseY);
+    }
 }
 
 function convertSeconds(s) {
