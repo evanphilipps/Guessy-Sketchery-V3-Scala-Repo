@@ -46,14 +46,13 @@ def send_to_scala(data):
     scala_socket.sendall(json.dumps(data).encode())
 
 
-
 # ** Setup and start Python web server **
 
-@socket_server.on('register')
+@socket_server.on('connect')
 def got_message(username):
+    print(request.sid + " connected")
     usernameToSid[username] = request.sid
     sidToUsername[request.sid] = username
-    print(username + " connected")
     message = {"username": username, "action": "connected"}
     send_to_scala(message)
 
@@ -68,6 +67,7 @@ def disconnect():
     send_to_scala(message)
 
 
+# noinspection PyInterpreter
 @socket_server.on('mouse')
 def mouse_down():
     print(request.sid + " moused down")
@@ -86,13 +86,13 @@ def game():
         username = request.form.get('username')
     else:
         username = "GuestUser#" + str(randint(0, 100000))
-    print(username)
+    print(username + " registered")
     return render_template('game.html', username=username)
 
 
 @app.route('/<path:filename>')
 def static_files(filename):
-    return send_from_directory('static_files', filename)
+    return send_from_directory('templates', filename)
 
 
 print("Listening on port 8080")

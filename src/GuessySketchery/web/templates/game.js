@@ -25,7 +25,7 @@ var score = 0;
 var type = "guesser";
 var socket = io.connect({transports: ['websocket']});
 socket.on('connect', function (event) {
-    print("CONNECTED"+socket)
+    console.log("CONNECTED " + event)
 });
 /*socket.on('gameState', parseGameState);
 

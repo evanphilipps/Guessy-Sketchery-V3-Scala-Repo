@@ -1,8 +1,6 @@
 package GuessySketchery.model
 
-import GuessySketchery.model.Player
 import play.api.libs.json.{JsValue, Json}
-import scala.util.Random._
 
 class Game {
 
@@ -13,7 +11,6 @@ class Game {
   def addPlayer(username: String): Unit = {
     val player = new Player(0, "guesser", "")
     players += (username -> player)
-    println(players)
   }
 
   def removePlayer(username: String): Unit = {
@@ -22,9 +19,14 @@ class Game {
 
 def gameState(): String = {
   val gameState: Map[String, JsValue] = Map(
-    "players" -> Json.toJson(players),
-    "drawings" -> Json.toJson(drawings)
-  )
+    "players" -> Json.toJson(this.players.map({ case (k, v) => Json.toJson(Map(
+      "score" -> Json.toJson(v.pScore),
+      "job" -> Json.toJson(v.pJob),
+      "guess" -> Json.toJson(v.pGuess),
+      "id" -> Json.toJson(k)))
+    })),
+    "drawings" -> Json.toJson(drawings))
+  Json.stringify(Json.toJson(gameState))
 }
 /*
   def gameState(): String = {

@@ -13,7 +13,8 @@ class GameActor extends Actor {
   override def receive: Receive = {
     case message: AddPlayer => game.addPlayer(message.username)
     case message: RemovePlayer => game.removePlayer(message.username)
-
+    case message: MouseDraw => game.drawings(message.username)
+    case UpdateGame =>
     case SendGameState => sender() ! GameState(game.gameState())
   }
 }
